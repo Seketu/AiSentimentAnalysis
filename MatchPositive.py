@@ -4,35 +4,21 @@ import matplotlib.pyplot as plt
 # Veri setini okuma
 dataset = pd.read_csv(r"C:\Users\avina\OneDrive\Belgeler\python\new_dataset.csv")
 
-# Tüm verileri küçük harfe çevirerek normalize etme
-dataset = dataset.apply(lambda x: x.str.lower() if x.dtype == "object" else x)
-
 # Sütunları seçme
 geminiColumn = dataset["Gemini"]
 gptColumn = dataset["Gpt"]
 llamaColumn = dataset["Llama"]
 coreColumn = dataset["Core"]
 
-# Core'daki "negative" değerlerle eşleşen diğer sütunların "negative" değerlerini seçme
-gemini_negative_match = ((geminiColumn == "negative") & (coreColumn == "negative")).sum()
-gpt_negative_match = ((gptColumn == "negative") & (coreColumn == "negative")).sum()
-llama_negative_match = ((llamaColumn == "negative") & (coreColumn == "negative")).sum()
+# Core'daki Negative değerlerle eşleşen diğer sütunların Negative değerlerini seçme
+gemini_negative_match = ((geminiColumn == "Negative") & (coreColumn == "Negative")).sum()
+gpt_negative_match = ((gptColumn == "Negative") & (coreColumn == "Negative")).sum()
+llama_negative_match = ((llamaColumn == "Negative") & (coreColumn == "Negative")).sum()
 
-# Her sütun için toplam "negative" değerler
-gemini_total_negative = (geminiColumn == "negative").sum()
-gpt_total_negative = (gptColumn == "negative").sum()
-llama_total_negative = (llamaColumn == "negative").sum()
-
-# Her sütun için kalan (eşleşmeyen) "negative" değerler
-gemini_non_match = gemini_total_negative - gemini_negative_match
-gpt_non_match = gpt_total_negative - gpt_negative_match
-llama_non_match = llama_total_negative - llama_negative_match
-
-# Çapraz kontrol
-print("Kontrol: Toplamlar doğru mu?")
-print(f"Gemini toplam: {gemini_total_negative}, Match: {gemini_negative_match}, Non-Match: {gemini_non_match}")
-print(f"GPT toplam: {gpt_total_negative}, Match: {gpt_negative_match}, Non-Match: {gpt_non_match}")
-print(f"Llama toplam: {llama_total_negative}, Match: {llama_negative_match}, Non-Match: {llama_non_match}")
+# Her sütun için kalan (eşleşmeyen) Negative değerler
+gemini_non_match = (geminiColumn == "Negative").sum() - gemini_negative_match
+gpt_non_match = (gptColumn == "Negative").sum() - gpt_negative_match
+llama_non_match = (llamaColumn == "Negative").sum() - llama_negative_match
 
 # Pie grafikleri için veri
 data = [

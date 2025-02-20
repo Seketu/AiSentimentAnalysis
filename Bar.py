@@ -55,7 +55,7 @@ for i, rects in enumerate([bars1, bars2, bars3]):
         height = bar.get_height()
         bottom = bar.get_y()
         xval = bar.get_x() + bar.get_width() / 2  # Barın merkezi
-        ax.text(xval, bottom + height / 2, int(count), ha='center', va='center', fontsize=10, color='white')  # Sayıyı ortala
+        ax.text(xval, bottom + height / 2, int(count), ha='center', va='center', fontsize=25, color='white')  # Sayıyı ortala
 
 ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
@@ -64,7 +64,7 @@ max_value = max([sum(x) for x in zip(positive_counts, notr_counts, negative_coun
 plt.yticks(range(0, max_value + 2, 10)) 
 
 # Legend'i grafiğin dışına taşıma
-ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
+ax.legend(loc='upper left', bbox_to_anchor=(1, 1),fontsize = 16)
 
 # Layout düzenleme
 plt.tight_layout()

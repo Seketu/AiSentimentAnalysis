@@ -37,7 +37,7 @@ def askToGpt(prompt, GptResult):
      content : str = response.choices[0].message.content
 
      if "+1" in content:
-         result = "Pozitive"
+         result = "Positive"
      elif "-1" in content:
          result = "Negative"
      elif "0" in content:
@@ -80,7 +80,7 @@ def askToLlama(prompt : str , LlamaResult : list):
 def askToGemini(prompt : str , GeminiList : list):
     model = genai.GenerativeModel(model_name="gemini-1.5-flash")
     toPrompt = "Analyze the sentiment of the following tweet and provide a score of **+1** for positive, **0** for neutral, or **-1** for negative, followed by a brief explanation of the sentiment. The score must be included exactly as specified and used only once. tweet : " + prompt
-
+    print(toPrompt)
     response = model.generate_content(toPrompt,
     safety_settings={
         HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT : HarmBlockThreshold.BLOCK_NONE,
@@ -113,13 +113,13 @@ text = dataset["train"]["text"]
 combined = list(zip(text, TrainList))
 
 # 250 rastgele metin-etiket çiftini seç
-random_combined = random.sample(combined, 150)
+random_combined = random.sample(combined, 2000)
 
 # Seçilen metin ve etiketleri ayrı listelere ayır
 promptList, selectedTrainList = zip(*random_combined)
 
 j=0
-a = 5
+a = 3
 #Start To Models at sub-thread
 for i in promptList:
     t1 = threading.Thread(target=askToGemini,args=(i,GeminiResult))

@@ -20,6 +20,6 @@ def highlight_columns(s):
 styled_df = df.style.apply(highlight_columns, axis=1)
 
 # HTML dosyasını oluştur
-html_file_path = html_file_path = r"C:\Users\avina\OneDrive\Belgeler\python\dataset_output.html"
+html_file_path = html_file_path = r"C:\Users\avina\OneDrive\Belgeler\python\dataset_output2.html"
 
 styled_df.to_html(html_file_path, index=False, escape=False)
